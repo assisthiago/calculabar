@@ -4,23 +4,45 @@
     <title>CalculaBar</title>
     <base href="/">
 
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
     <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body ng-app="CalculaBar">
-    <h1>Hello, World!</h1>
+<body layout="column" ng-cloak ng-app="CalculaBar" ng-controller="AppController as app">
 
-    {{ 1 + 1 }}
+    <md-toolbar class="md-toolbar-tools" layout="row">
+        <md-button class="menu md-icon-button fa fa-bars" aria-hidden="true" aria-label="bars" ng-click="app.toggleList()"></md-button>
+        <h1>CalculaBar</h1>
+    </md-toolbar>
+
+    <div flex layout="row">
+        <md-sidenav class="md-whiteframe-4dp" md-is-locked-open="app.isOpen" md-component-id="left" ng-click="app.toggleList()">
+            <md-list>
+                <md-list-item>
+                    <md-button ui-sref="confrades">Confrades</md-button>
+                </md-list-item>
+            </md-list>
+        </md-sidenav>
+
+        <md-content id="content" class="content" flex ui-view="content"></md-content>
+    </div>
 
     <!-- dependencies' scripts -->
     <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/bower_components/angular-aria/angular-aria.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/angular-material/angular-material.js"></script>
 
     <!-- app's scripts -->
     <script src="app.module.js"></script>
+    <script src="app/dist/js/app.router.js"></script>
+    <script src="app/dist/js/app.controller.js"></script>
+
+    <script src="app/dist/js/confrades/confrades.controller.js"></script>
 </body>
 </html>
