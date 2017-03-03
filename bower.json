@@ -1,0 +1,22 @@
+{
+  "name": "calculabar",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Thiago Assis"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/assisthiago/calculabar",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "^1.6.2",
+    "angular-ui-router": "^0.4.2",
+    "angular-material": "^1.1.3"
+  }
+}
