@@ -25,7 +25,7 @@ gulp.task('serve', () => {
     });
 
     gulp.watch('*.html').on('change', browserSync.reload);
-    gulp.watch(path.src.css, ['css']);
+    gulp.watch(path.src.sass, ['css']);
     gulp.watch(path.src.js, ['js']);
 });
 
