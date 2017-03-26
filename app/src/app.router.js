@@ -5,12 +5,12 @@
         .module('CalculaBar')
         .config(($stateProvider, $locationProvider, $urlRouterProvider) => {
             $stateProvider
-                .state('confrades', {
+                .state('friends', {
                     url: '/',
                     views: {
                         content: {
-                            controller: 'ConfradesController as $ctrl',
-                            templateUrl: '/app/src/confrades/confrades.template.html'
+                            controller: 'FriendsController as $ctrl',
+                            templateUrl: '/app/src/friends/friends.template.html'
                         },
                         navigation: {
                             controller: 'NavController as $ctrl'

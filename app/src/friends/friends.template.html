@@ -1,0 +1,20 @@
+<div id="friends" class="friends">
+    <form name="FormFriend" ng-submit="$ctrl.addFriend()" novalidate>
+        <md-input-container class="md-block">
+            <label>Nome</label>
+            <input name="name" ng-model="$ctrl.name">
+        </md-input-container>
+    </form>
+    <md-list flex class="list-container">
+        <md-list-item class="md-2-line" class="list-wrapper">
+            <div class="md-list-item-text item-wrapper" layout="column">
+                <h3>Thiago Assis</h3>
+                <h4>Conta: <strong>R$38,47</strong></h4>
+                <div class="item-buttons-command">
+                    <md-button><i class="fa fa-pencil-square-o" aria-hidden="true"></i></md-button>
+                    <md-button><i class="fa fa-shopping-basket" aria-hidden="true"></i></md-button>
+                </div>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
