@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('CalculaBar', ['ui.router', 'ngMaterial']);
+        .module('CalculaBar', ['ui.router']);
 
 })();
