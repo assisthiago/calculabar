@@ -2,22 +2,23 @@
 
     angular
         .module('CalculaBar')
-        .controller('AmigosController', AmigosController);
+        .controller('FriendsController', FriendsController);
 
-    AmigosController.$inject = [];
+    FriendsController.$inject = [];
 
-    function AmigosController() {
-        const $ctrl = this;
+    function FriendsController() {
+        var $ctrl = this;
 
-        // vars
-        let bar = {};
-
-        // functions
-        $ctrl.addFriend = addFriend;
-
-        function addFriend() {
-            console.log($ctrl.name);
-        };
+        $ctrl.list_friends = [
+        {
+            name: 'Danilo Assis',
+            bill_to_pay: '888,88'
+        },
+        {
+            name: 'Thiago Assis',
+            bill_to_pay: '888,88'
+        }
+        ];
     };
 
 })();

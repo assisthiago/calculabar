@@ -1,20 +1,45 @@
 <div id="friends" class="friends">
-    <form name="FormFriend" ng-submit="$ctrl.addFriend()" novalidate>
-        <md-input-container class="md-block">
-            <label>Nome</label>
-            <input name="name" ng-model="$ctrl.name">
-        </md-input-container>
-    </form>
-    <md-list flex class="list-container">
-        <md-list-item class="md-2-line" class="list-wrapper">
-            <div class="md-list-item-text item-wrapper" layout="column">
-                <h3>Thiago Assis</h3>
-                <h4>Conta: <strong>R$38,47</strong></h4>
-                <div class="item-buttons-command">
-                    <md-button><i class="fa fa-pencil-square-o" aria-hidden="true"></i></md-button>
-                    <md-button><i class="fa fa-shopping-basket" aria-hidden="true"></i></md-button>
+    <h1>lista de amigos</h1>
+
+    <div class="row">
+        <div class="col-xs-12 friends-add">
+            <form novalidate>
+                <div class="form-group">
+                    <label class="sr-only" for="name">nome</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Nome">
                 </div>
-            </div>
-        </md-list-item>
-    </md-list>
+                <button class="btn btn-default pull-right">adicionar</button>
+            </form>
+        </div>
+
+        <div class="col-xs-12 friends-list">
+            <table class="table table-striped">
+                <tr class="friends-box" ng-repeat="friend in $ctrl.list_friends track by $index">
+                    <td>
+                        <p>{{ friend.name }}</p>
+                        <strong>R${{ friend.bill_to_pay }}</strong>
+                    </td>
+                    <td>
+                        <button class="btn btn-default pull-right" data-toggle="modal" data-target="#modalCheckout">
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="modalCheckoutLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>O amigo já pagou a conta?</p>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Sim</button>
+      </div>
+    </div>
+  </div>
 </div>

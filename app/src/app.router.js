@@ -11,9 +11,6 @@
                         content: {
                             controller: 'FriendsController as $ctrl',
                             templateUrl: '/app/src/friends/friends.template.html'
-                        },
-                        navigation: {
-                            controller: 'NavController as $ctrl'
                         }
                     }
                 });
