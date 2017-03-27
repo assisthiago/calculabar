@@ -6,40 +6,30 @@
             <form name="formFriends" novalidate>
                 <div class="form-group">
                     <label class="sr-only" for="name">nome</label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="Nome">
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Nome" ng-model="$ctrl.name">
                 </div>
-                <button class="btn btn-default pull-right">adicionar</button>
+                <button class="btn btn-default btn-add pull-right" ng-click="$ctrl.addFriend($ctrl.name)" >adicionar</button>
             </form>
         </div>
 
         <div class="col-xs-12 friends-list" ng-if="$ctrl.list_friends">
             <table class="table table-striped">
                 <tr class="friends-box" ng-repeat="friend in $ctrl.list_friends track by $index">
-                    <td>
+                    <td class="friends-wrapper">
                         <p>{{ friend.name }}</p>
                         <strong>R${{ friend.bill_to_pay }}</strong>
-                    </td>
-                    <td>
-                        <button class="btn btn-default pull-right" data-toggle="modal" data-target="#modalCheckout">
+                        <button class="btn btn-default btn-checkout" ng-click="friend.isHePaying = true">
                             <i class="fa fa-money" aria-hidden="true"></i>
                         </button>
+                        <div class="friends-confirm-checkout" ng-show="friend.isHePaying">
+                            <p>Certeza que seu amigo pagou a conta?</p>
+                            <button class="btn btn-default" ng-click="$ctrl.yesHePaid(friend)">Sim</button>
+                            <button class="btn btn-danger" ng-click="friend.isHePaying = false">Não</button>
+                        </div>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
 
-</div>
-
-<!-- Checkout Modal -->
-<div class="modal fade" id="modalCheckout" tabindex="-1" role="dialog" aria-labelledby="modalCheckoutLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>O amigo já pagou a conta?</p>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Sim</button>
-      </div>
-    </div>
-  </div>
 </div>
