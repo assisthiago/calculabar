@@ -1,0 +1,49 @@
+<div id="orders" class="orders">
+    <h1>lista de pedidos</h1>
+
+    <div class="row">
+        <div class="col-xs-12 orders-add">
+            <form name="formOrder" novalidate>
+                <div class="row">
+                    <div class="form-group col-xs-8">
+                        <label class="sr-only" for="order">pedido</label>
+                        <input type="text" id="order" name="order" class="form-control" placeholder="Pedido">
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <label class="sr-only" for="price">preço</label>
+                        <input type="text" id="price" name="price" class="form-control" placeholder="Pedido">
+                    </div>
+                    <div class="col-xs-12">
+                        <button class="btn btn-default pull-right">adicionar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-xs-12 orders-list" ng-if="$ctrl.list_orders">
+            <strong>conta da mesa: R${{ $ctrl.bill_on_the_table }}</strong>
+            <table class="table table-striped">
+                <tr class="orders-box" ng-repeat="order in $ctrl.list_orders track by $index">
+                    <td>
+                        <div class="orders-info">
+                            <p>{{ order.name }} <span class="badge">{{ order.qty }}</span></p>
+                            <strong>R${{ order.bill_of_product }}</strong>
+                        </div>
+                        <div class="orders-commands">
+                            <button class="btn btn-danger pull-right">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-default pull-right">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-default pull-right">
+                                <i class="fa fa-minus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>

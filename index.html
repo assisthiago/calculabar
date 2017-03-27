@@ -19,12 +19,14 @@
         <main id="content" class="container content" ui-view="content"></main>
         <!-- Navigation -->
         <footer id="nav" class="nav">
-            <button class="btn btn-default">
-                <i class="fa fa-users" aria-hidden="true"></i>
-            </button>
-            <button class="btn btn-default">
-                <i class="fa fa-book" aria-hidden="true"></i>
-            </button>
+            <div class="row">
+                <button class="btn btn-default col-xs-6" ui-sref="friends">
+                    <i class="fa fa-users" aria-hidden="true"></i> lista de amigos
+                </button>
+                <button class="btn btn-default col-xs-6" ui-sref="orders">
+                    <i class="fa fa-book" aria-hidden="true"></i> lista de pedidos
+                </button>
+            </div>
         </footer>
         <!-- End Navigation -->
     </div>
@@ -41,5 +43,6 @@
 
     <!-- app's controllers -->
     <script src="app/dist/js/friends/friends.controller.js"></script>
+    <script src="app/dist/js/orders/orders.controller.js"></script>
 </body>
 </html>
