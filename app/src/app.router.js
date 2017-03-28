@@ -6,7 +6,7 @@
         .config(($stateProvider, $locationProvider, $urlRouterProvider) => {
             $stateProvider
                 .state('friends', {
-                    url: '/',
+                    url: '/friends',
                     views: {
                         content: {
                             controller: 'FriendsController as $ctrl',
@@ -15,7 +15,7 @@
                     }
                 })
                 .state('orders', {
-                    url: '/orders',
+                    url: '/',
                     views: {
                         content: {
                             controller: 'OrdersController as $ctrl',
