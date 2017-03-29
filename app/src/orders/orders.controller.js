@@ -1,7 +1,7 @@
 (() => {
 
     angular
-        .module('CalculaBar')
+        .module('CalculoBar')
         .controller('OrdersController', OrdersController);
 
     OrdersController.$inject = [];

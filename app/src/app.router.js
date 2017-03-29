@@ -2,24 +2,38 @@
 
 (function () {
     angular
-        .module('CalculaBar')
+        .module('CalculoBar')
         .config(($stateProvider, $locationProvider, $urlRouterProvider) => {
             $stateProvider
+                .state('home', {
+                    url: '/',
+                    views: {
+                        content: {
+                            templateUrl: '/app/src/home/home.template.html'
+                        }
+                    }
+                })
                 .state('friends', {
                     url: '/friends',
                     views: {
                         content: {
                             controller: 'FriendsController as $ctrl',
                             templateUrl: '/app/src/friends/friends.template.html'
+                        },
+                        footer: {
+                            templateUrl: 'app/src/nav/nav.template.html'
                         }
                     }
                 })
                 .state('orders', {
-                    url: '/',
+                    url: '/orders',
                     views: {
                         content: {
                             controller: 'OrdersController as $ctrl',
                             templateUrl: '/app/src/orders/orders.template.html'
+                        },
+                        footer: {
+                            templateUrl: 'app/src/nav/nav.template.html'
                         }
                     }
                 });

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>CalculaBar</title>
+    <title>calculobar</title>
     <base href="/">
 
     <meta charset="utf-8">
@@ -13,21 +13,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="app/dist/css/style.css">
 </head>
-<body ng-app="CalculaBar" ng-cloak>
+<body ng-app="CalculoBar" ng-cloak>
 
     <div class="body-wrapper">
         <main id="content" class="container content" ui-view="content"></main>
         <!-- Navigation -->
-        <footer id="nav" class="nav">
-            <div class="row">
-                <button class="btn btn-default col-xs-6" ui-sref="friends">
-                    <i class="fa fa-users" aria-hidden="true"></i> lista de amigos
-                </button>
-                <button class="btn btn-default col-xs-6" ui-sref="orders">
-                    <i class="fa fa-book" aria-hidden="true"></i> lista de pedidos
-                </button>
-            </div>
-        </footer>
+        <footer id="footer" class="footer" ui-view="footer"></footer>
         <!-- End Navigation -->
     </div>
 
