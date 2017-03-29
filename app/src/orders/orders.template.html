@@ -20,28 +20,37 @@
             </form>
         </div>
 
-        <div class="col-xs-12 orders-list" ng-if="$ctrl.list_orders">
+        <p class="col-xs-12 no-list" ng-if="($ctrl.list_orders.length == 0)">Sem pedidos.</p>
+
+        <div class="col-xs-12 orders-list" ng-if="($ctrl.list_orders.length != 0)">
             <div class="orders-bill-on-table">
                 <strong>conta da mesa: R${{ $ctrl.bill_on_the_table }}</strong>
                 <label><input type="checkbox" ng-model="$ctrl.isTipping"> 10%</label>
             </div>
             <table class="table table-striped">
                 <tr class="orders-box" ng-repeat="order in $ctrl.list_orders track by $index">
-                    <td>
+                    <td class="item-wrapper orders-wrapper">
                         <div class="orders-info">
-                            <p>{{ order.name }} <span class="badge">{{ order.qty }}</span></p>
-                            <strong>R${{ order.bill_of_product }}</strong>
+                            <p>{{ order.name }}</p>
+                            <strong>
+                                <span class="badge">{{ order.qty }}</span> R${{ order.bill_of_product }}
+                            </strong>
                         </div>
                         <div class="orders-commands">
-                            <button class="btn btn-danger pull-right">
+                            <button class="btn btn-danger pull-right" ng-click="order.isHeRemoving = true">
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
-                            <button class="btn btn-default pull-right">
+                            <button class="btn btn-default pull-right" ng-click="$ctrl.orderCommands(order, 'increase')">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </button>
-                            <button class="btn btn-default pull-right">
+                            <button class="btn btn-default pull-right" ng-click="$ctrl.orderCommands(order, 'decrease')">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                             </button>
+                        </div>
+                        <div class="remove-item-alert" ng-show="order.isHeRemoving">
+                            <p>Certeza que retirar o pedido da conta?</p>
+                            <button class="btn btn-default" ng-click="$ctrl.orderCommands(order, 'remove')">Sim</button>
+                            <button class="btn btn-danger" ng-click="order.isHeRemoving = false">Não</button>
                         </div>
                     </td>
                 </tr>

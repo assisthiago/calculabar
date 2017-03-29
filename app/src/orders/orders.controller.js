@@ -21,6 +21,7 @@
 
         // functions
         $ctrl.addOrder = addOrder;
+        $ctrl.orderCommands = orderCommands;
 
         function addOrder(order, price) {
             if (order, price) {
@@ -35,6 +36,33 @@
                 $ctrl.price = '';
             }
             else return false;
+        };
+
+        function orderCommands(order, action) {
+            switch (action) {
+                case 'decrease':
+                    var qty = (parseInt(order.qty) - 1 <= 0) ? 1 : parseInt(order.qty) - 1;
+                    order.qty = qty;
+                    break;
+
+                case 'increase':
+                    var qty = parseInt(order.qty) + 1;
+                    order.qty = qty;
+                    break;
+
+                case 'remove':
+                    $ctrl.list_orders.forEach((obj, i, arr) => {
+                        if (obj.name == order.name) {
+                            arr.splice(i, 1);
+                        };
+                    });
+                    break;
+
+                default:
+                    console.error('Some shit must happend :(');
+                    break;
+
+            };
         };
     };
 

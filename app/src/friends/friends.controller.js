@@ -36,10 +36,10 @@
             else return false;
         };
 
-        function yesHePaid(brotha) {
-            $ctrl.list_friends.forEach((obj, i, array) => {
-                if (obj.name == brotha.name) {
-                    array.splice(i, 1)
+        function yesHePaid(friend) {
+            $ctrl.list_friends.forEach((obj, i, arr) => {
+                if (obj.name == friend.name) {
+                    arr.splice(i, 1);
                 };
             });
         };
