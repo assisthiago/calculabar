@@ -21,7 +21,7 @@
                 <tr class="friends-box" ng-repeat="friend in $ctrl.list_friends track by $index">
                     <td class="item-wrapper friends-wrapper">
                         <p>{{ friend.name }}</p>
-                        <strong> {{ friend.bill_to_pay | currency:'R$ ' }}</strong>
+                        <strong>{{ friend.bill_to_pay | currency:'R$' }}</strong>
                         <button class="btn btn-default btn-checkout" ng-click="friend.isHePaying = true">
                             <i class="fa fa-money" aria-hidden="true"></i>
                         </button>

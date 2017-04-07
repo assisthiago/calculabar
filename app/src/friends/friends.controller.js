@@ -20,8 +20,8 @@
                     name: name,
                     bill_to_pay: 0,
                 };
-                $ctrl.list_friends.push(friend);
                 $ctrl.name = '';
+                $ctrl.list_friends.push(friend);
                 localStorageService.set('Friends', $ctrl.list_friends);
             }
             else return false;
