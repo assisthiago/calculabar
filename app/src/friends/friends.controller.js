@@ -4,21 +4,11 @@
         .module('CalculoBar')
         .controller('FriendsController', FriendsController);
 
-    FriendsController.$inject = [];
+    FriendsController.$inject = ['localStorageService'];
 
-    function FriendsController() {
+    function FriendsController(localStorageService) {
         var $ctrl = this;
-
-        $ctrl.list_friends = [
-            {
-                name: 'Danilo Assis',
-                bill_to_pay: '888,88'
-            },
-            {
-                name: 'Thiago Assis',
-                bill_to_pay: '888,88'
-            }
-        ];
+        $ctrl.list_friends = localStorageService.get('Friends') ? localStorageService.get('Friends') : [];
 
         // functions
         $ctrl.addFriend = addFriend;
@@ -28,20 +18,23 @@
             if (name) {
                 var friend = {
                     name: name,
-                    bill_to_pay: '888,88',
+                    bill_to_pay: 0,
                 };
                 $ctrl.list_friends.push(friend);
                 $ctrl.name = '';
+                localStorageService.set('Friends', $ctrl.list_friends);
             }
             else return false;
         };
 
         function yesHePaid(friend) {
-            $ctrl.list_friends.forEach((obj, i, arr) => {
-                if (obj.name == friend.name) {
-                    arr.splice(i, 1);
+            var len = $ctrl.list_friends.length;
+            for (var i = 0; i < len; i++) {
+                if ($ctrl.list_friends[i].name == friend.name) {
+                    $ctrl.list_friends.splice(i, 1);
                 };
-            });
+            };
+            localStorageService.set('Friends', $ctrl.list_friends);
         };
     };
 

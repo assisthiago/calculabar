@@ -6,7 +6,7 @@
         .config(($stateProvider, $locationProvider, $urlRouterProvider) => {
             $stateProvider
                 .state('home', {
-                    url: '/',
+                    url: '/home',
                     views: {
                         content: {
                             templateUrl: '/app/src/home/home.template.html'
@@ -14,7 +14,7 @@
                     }
                 })
                 .state('friends', {
-                    url: '/friends',
+                    url: '/',
                     views: {
                         content: {
                             controller: 'FriendsController as $ctrl',

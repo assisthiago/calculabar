@@ -2,6 +2,6 @@
     'use strict';
 
     angular
-        .module('CalculoBar', ['ui.router']);
+        .module('CalculoBar', ['ui.router', 'LocalStorageModule']);
 
 })();
