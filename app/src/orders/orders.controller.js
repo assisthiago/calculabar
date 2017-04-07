@@ -11,10 +11,15 @@
 
         $ctrl.bill_on_the_table = 29.99
         $ctrl.list_orders = localStorageService.get('Orders') ? localStorageService.get('Orders') : [];
+        $ctrl.list_friends = localStorageService.get('Friends') ? localStorageService.get('Friends') : [];
 
         // functions
         $ctrl.addOrder = addOrder;
         $ctrl.orderCommands = orderCommands;
+
+        $ctrl.foo = function() {
+            console.log($ctrl.iAmPaying);
+        };
 
         function addOrder(order, price) {
             if (order, price) {
@@ -49,8 +54,9 @@
                     for (var i = 0; i < len; i ++) {
                         if ($ctrl.list_orders[i].name == order.name) {
                             $ctrl.list_orders.splice(i, 1);
+                            localStorageService.set('Orders', $ctrl.list_orders);
+                            return true;
                         };
-                        localStorageService.set('Orders', $ctrl.list_orders);
                     };
                     break;
 

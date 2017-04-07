@@ -32,9 +32,10 @@
             for (var i = 0; i < len; i++) {
                 if ($ctrl.list_friends[i].name == friend.name) {
                     $ctrl.list_friends.splice(i, 1);
+                    localStorageService.set('Friends', $ctrl.list_friends);
+                    return true;
                 };
             };
-            localStorageService.set('Friends', $ctrl.list_friends);
         };
     };
 
