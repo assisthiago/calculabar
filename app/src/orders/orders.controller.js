@@ -9,25 +9,38 @@
     function OrdersController(localStorageService) {
         var $ctrl = this;
 
+        // mocks
         $ctrl.bill_on_the_table = 29.99
+
+        // vars
         $ctrl.list_orders = localStorageService.get('Orders') ? localStorageService.get('Orders') : [];
         $ctrl.list_friends = localStorageService.get('Friends') ? localStorageService.get('Friends') : [];
+        $ctrl.list_friends_in_order = [];
+        $ctrl.isSomebodyPayingOrder = false;
 
         // functions
         $ctrl.addOrder = addOrder;
         $ctrl.orderCommands = orderCommands;
+        $ctrl.markThisFriendToPay = markThisFriendToPay;
 
-        $ctrl.foo = function() {
-            console.log($ctrl.iAmPaying);
+        // private functions
+        function _isSomebodyPayingOrder() {
+            if ($ctrl.list_friends_in_order.length == 0) {
+                $ctrl.isSomebodyPayingOrder = false;
+            } else {
+                $ctrl.isSomebodyPayingOrder = true;
+            };
         };
 
+        // public functions
         function addOrder(order, price) {
             if (order, price) {
                 var order = {
                     name: order,
                     price: price,
                     qty: 1,
-                    bill_of_product: price
+                    bill_of_product: price,
+                    whoArePaying: $ctrl.list_friends_in_order
                 };
                 $ctrl.order = '';
                 $ctrl.price = '';
@@ -63,9 +76,39 @@
                 default:
                     console.error('Some shit must happend :(');
                     break;
-
             };
         };
+
+        function markThisFriendToPay(friend, e) {
+            var i = 0;
+            var len = $ctrl.list_friends_in_order.length;
+
+            if (e.target.checked) {
+                if (len == 0) {
+                    $ctrl.list_friends_in_order.push(friend.name);
+                    _isSomebodyPayingOrder();
+                }
+                else {
+                    for (i; i < len; i++) {
+                        if (friend.name != $ctrl.list_friends_in_order[i]) {
+                            $ctrl.list_friends_in_order.push(friend.name);
+                            _isSomebodyPayingOrder();
+                            return true;
+                        };
+                    };
+                };
+            }
+            else {
+                for (i; i < len; i++) {
+                    if (friend.name == $ctrl.list_friends_in_order[i]) {
+                        $ctrl.list_friends_in_order.splice(i, 1);
+                        _isSomebodyPayingOrder();
+                        return true;
+                    };
+                };
+            };
+        };
+
     };
 
 })();
