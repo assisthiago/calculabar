@@ -1,6 +1,6 @@
-'use strict';
+(() => {
+    'use strict';
 
-(function () {
     angular
         .module('CalculoBar')
         .config(($stateProvider, $locationProvider, $urlRouterProvider) => {
@@ -31,6 +31,18 @@
                         content: {
                             controller: 'OrdersController as $ctrl',
                             templateUrl: '/app/src/orders/orders.template.html'
+                        },
+                        footer: {
+                            templateUrl: 'app/src/nav/nav.template.html'
+                        }
+                    }
+                })
+                .state('ordersDetails', {
+                    url: '/a',
+                    views: {
+                        content: {
+                            controller: 'OrdersDetailsController as $ctrl',
+                            templateUrl: '/app/src/orders_details/orders_details.template.html'
                         },
                         footer: {
                             templateUrl: 'app/src/nav/nav.template.html'

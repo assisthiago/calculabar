@@ -4,24 +4,23 @@
         .module('CalculoBar')
         .controller('OrdersController', OrdersController);
 
-    OrdersController.$inject = ['localStorageService'];
+    OrdersController.$inject = ['$state', 'localStorageService'];
 
-    function OrdersController(localStorageService) {
-        var $ctrl = this;
-
-        // mocks
-        $ctrl.bill_on_the_table = 29.99
+    function OrdersController($state, localStorageService) {
+        const $ctrl = this;
 
         // vars
         $ctrl.list_orders = localStorageService.get('Orders') ? localStorageService.get('Orders') : [];
         $ctrl.list_friends = localStorageService.get('Friends') ? localStorageService.get('Friends') : [];
         $ctrl.list_friends_in_order = [];
         $ctrl.isSomebodyPayingOrder = false;
+        $ctrl.bill_on_the_table = 888.88;
 
         // functions
         $ctrl.addOrder = addOrder;
         $ctrl.orderCommands = orderCommands;
         $ctrl.markThisFriendToPay = markThisFriendToPay;
+        $ctrl.seeOrdersDetails = seeOrdersDetails;
 
         // private functions
         function _isSomebodyPayingOrder() {
@@ -32,11 +31,25 @@
             };
         };
 
+        function _saveOrderInFriends(order, list_friends_in_order) {
+            const lenWhoPaying = list_friends_in_order.length;
+            const lenFriends = $ctrl.list_friends.length;
+
+            for (let i = 0; i < lenFriends; i++) {
+                for (let j = 0; j < lenWhoPaying; j++) {
+                    if ($ctrl.list_friends[j].name == list_friends_in_order[i]) {
+                        $ctrl.list_friends[j].orders.push(order);
+                    };
+                };
+            };
+            // localStorageService.set('Friends', $ctrl.list_friends);
+        };
+
         // public functions
-        function addOrder(order, price) {
-            if (order, price) {
-                var order = {
-                    name: order,
+        function addOrder(order_name, price) {
+            if (order_name && price) {
+                const order = {
+                    name: order_name,
                     price: price,
                     qty: 1,
                     bill_of_product: price,
@@ -44,30 +57,38 @@
                 };
                 $ctrl.order = '';
                 $ctrl.price = '';
+                // $ctrl.bill_on_the_table += price;
                 $ctrl.list_orders.push(order);
                 localStorageService.set('Orders', $ctrl.list_orders);
+                _saveOrderInFriends(order_name, $ctrl.list_friends_in_order);
             }
             else return false;
         };
 
         function orderCommands(order, action) {
+            let qty;
             switch (action) {
                 case 'decrease':
-                    var qty = (parseInt(order.qty) - 1 <= 0) ? 1 : parseInt(order.qty) - 1;
+                    qty = (parseInt(order.qty) - 1 <= 0) ? 1 : parseInt(order.qty) - 1;
                     order.qty = qty;
+                    if (qty != 1) {
+                        // $ctrl.bill_on_the_table /= (qty + 1);
+                    };
                     break;
 
                 case 'increase':
-                    var qty = parseInt(order.qty) + 1;
+                    qty = parseInt(order.qty) + 1;
                     order.qty = qty;
+                    // $ctrl.bill_on_the_table *= qty;
                     break;
 
                 case 'remove':
-                    var len = $ctrl.list_orders.length;
-                    for (var i = 0; i < len; i ++) {
+                    const len = $ctrl.list_orders.length;
+                    for (let i = 0; i < len; i ++) {
                         if ($ctrl.list_orders[i].name == order.name) {
                             $ctrl.list_orders.splice(i, 1);
                             localStorageService.set('Orders', $ctrl.list_orders);
+                            // $ctrl.bill_on_the_table -= order.price;
                             return true;
                         };
                     };
@@ -80,8 +101,8 @@
         };
 
         function markThisFriendToPay(friend, e) {
-            var i = 0;
-            var len = $ctrl.list_friends_in_order.length;
+            let i = 0;
+            const len = $ctrl.list_friends_in_order.length;
 
             if (e.target.checked) {
                 if (len == 0) {
@@ -107,6 +128,11 @@
                     };
                 };
             };
+        };
+
+        function seeOrdersDetails(order) {
+            localStorageService.set('OrdersDetails', order);
+            $state.go('ordersDetails');
         };
 
     };

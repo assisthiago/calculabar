@@ -1,0 +1,25 @@
+<div id="orders" class="orders-details">
+    <h1>
+        <i class="fa fa-cutlery" aria-hidden="true"></i> detalhes do {{ $ctrl.order.name }}
+    </h1>
+
+    <div class="row">
+        <form name="formOrdersDetails" class="col-sm-12" novalidate>
+            <div class="input-group">
+                <span class="input-group-addon" id="label-name"><i class="fa fa-book" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" id="input-name" name="name" ng-model="$ctrl.order.name" aria-describedby="label-name">
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon" id="label-price"><i class="fa fa-money" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" id="input-price" name="price" ng-model="$ctrl.order.price" aria-describedby="label-price">
+            </div>
+        </form>
+        <div class="col-sm-12">
+            <div class="list-group">
+                <a href="#" class="list-group-item" ng-class="{ 'list-group-item-success': friend.inTheListOrder }" ng-repeat="friend in $ctrl.list_friends track by $index">{{ friend.name }}</a><span>{{friend.inTheListOrder}}</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
