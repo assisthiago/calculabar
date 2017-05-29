@@ -1,0 +1,19 @@
+<div id="friends" class="container friends" ng-init="$ctrl.init()">
+    <h1>
+        <i class="fa fa-user"></i>
+        {{ $ctrl.friend.name }}
+    </h1>
+    <h3>
+        R${{ $ctrl.friend.bill }}
+        <button class="btn btn-danger pull-right">
+            <i class="fa fa-shopping-cart"></i>
+        </button>
+    </h3>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="order in $ctrl.listOrders">
+            <span class="badge">{{ order.qty }}</span>
+            <p>{{ order.name }}</p>
+            <p>R${{ order.price }}</p>
+        </li>
+    </ul>
+</div>

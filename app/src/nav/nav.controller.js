@@ -11,14 +11,17 @@
 
         // vars
         $ctrl.listFriends = localStorageService.get('Friends') ? localStorageService.get('Friends') : [];
-        // $ctrl.listOrders = localStorageService.get('Orders') ? localStorageService.get('Orders') : [];
+        $ctrl.listOrders = localStorageService.get('Orders') ? localStorageService.get('Orders') : [];
         // $ctrl.listFriends = [];
-        $ctrl.listOrders = [];
+        // $ctrl.listOrders = [];
+        $ctrl.isAsideOrdesOpen = false;
 
         // functions
         $ctrl.addFriend = addFriend;
         $ctrl.addOrder = addOrder;
         $ctrl.delOrder = delOrder;
+        $ctrl.toggleAsideFriends = toggleAsideFriends;
+        $ctrl.toggleAsideOrders = toggleAsideOrders;
 
         // public functions
         function addFriend(name) {
@@ -66,6 +69,26 @@
         function delFriend(idx) {
             $ctrl.listFriends.splice(idx, 1);
             localStorageService.set('Orders', $ctrl.listFriends);
+        };
+
+        function toggleAsideFriends(name = '') {
+            $ctrl.isAsideFriendsOpen = $ctrl.isAsideFriendsOpen ? false : true;
+            $ctrl.markedFriends = [];
+            if (name) {
+                const len = $ctrl.listFriends.length;
+                for (let i = 0; i < len; i++) {
+                    if ($ctrl.listFriends[i].name == name) {
+                        localStorageService.set('CurrentFriend', $ctrl.listFriends[i]);
+                        break;
+                    };
+                };
+                $state.go('friend_detail');
+            };
+        };
+
+        function toggleAsideOrders() {
+            $ctrl.isAsideOrdesOpen = $ctrl.isAsideOrdesOpen ? false : true;
+            $ctrl.markedFriends = [];
         };
     };
 

@@ -1,16 +1,16 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <button type="button" class="btn btn-default navbar-btn" ng-click="isAsideFriendsOpen = !isAsideFriendsOpen">
+        <button type="button" class="btn btn-default navbar-btn" ng-click="$ctrl.toggleAsideFriends()">
             <i class="fa fa-users" aria-hidden="true"></i>
         </button>
-        <button type="button" class="btn btn-default navbar-btn pull-right" ng-click="isAsideOrdesOpen = !isAsideOrdesOpen">
+        <button type="button" class="btn btn-default navbar-btn pull-right" ng-click="$ctrl.toggleAsideOrders()">
             <i class="fa fa-cutlery" aria-hidden="true"></i>
         </button>
     </div>
 </nav>
 
 <!-- FRIENDS'ASIDE -->
-<aside id="aside-friends" class="aside-friends" ng-class="isAsideFriendsOpen ? 'open' : ''">
+<aside id="aside-friends" class="aside-friends" ng-class="$ctrl.isAsideFriendsOpen ? 'open' : ''">
     <form id="form-friends" class="form-friends" name="formFriends" novalidate>
         <div class="form-group">
             <label class="sr-only" for="name">name</label>
@@ -21,18 +21,18 @@
 
     <ul class="list-group list-friends">
         <li class="list-group-item" ng-class="{ 'checked': $ctrl.markedFriends[friend.name], 'unchecked': !$ctrl.markedFriends[friend.name] }" ng-if="($ctrl.listFriends.length != 0)" ng-repeat="friend in $ctrl.listFriends">
-            <div>
+            <div ng-click="$ctrl.toggleAsideFriends(friend.name)">
                 <p>{{ friend.name }}</p>
                 <p>R$ {{ friend.bill }}</p>
             </div>
-            <input type="checkbox" ng-model="$ctrl.markedFriends[friend.name]">
+            <input type="checkbox" ng-model="$ctrl.markedFriends[friend.name]" ng-if="$ctrl.isAsideOrdesOpen">
         </li>
         <li class="list-group-item text-center" ng-if="($ctrl.listFriends.length == 0)">list is empty.</li>
     </ul>
 </aside>
 
 <!-- ORDERS'ASIDE -->
-<aside id="aside-orders" class="aside-orders" ng-class="isAsideOrdesOpen ? 'open' : ''">
+<aside id="aside-orders" class="aside-orders" ng-class="$ctrl.isAsideOrdesOpen ? 'open' : ''">
     <form id="form-orders" class="form-orders" name="formOrders" novalidate>
         <div class="form-group">
             <label class="sr-only" for="order">order</label>

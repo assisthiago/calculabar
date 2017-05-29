@@ -8,35 +8,16 @@
 
     function FriendsController(localStorageService) {
         const $ctrl = this;
-        $ctrl.list_friends = localStorageService.get('Friends') ? localStorageService.get('Friends') : [];
+
+        // vars
+        $ctrl.init = init;
 
         // functions
-        $ctrl.addFriend = addFriend;
-        $ctrl.yesHePaid = yesHePaid;
-
-        function addFriend(name) {
-            if (name) {
-                const friend = {
-                    name: name,
-                    bill_to_pay: 0,
-                    orders: []
-                };
-                $ctrl.name = '';
-                $ctrl.list_friends.push(friend);
-                localStorageService.set('Friends', $ctrl.list_friends);
-            }
-            else return false;
-        };
-
-        function yesHePaid(friend) {
-            const len = $ctrl.list_friends.length;
-            for (let i = 0; i < len; i++) {
-                if ($ctrl.list_friends[i].name == friend.name) {
-                    $ctrl.list_friends.splice(i, 1);
-                    localStorageService.set('Friends', $ctrl.list_friends);
-                    return true;
-                };
-            };
+        function init() {
+            $ctrl.friend = localStorageService.get('CurrentFriend') ? localStorageService.get('CurrentFriend') : false;
+            $ctrl.listFriends = localStorageService.get('Friends') ? localStorageService.get('Friends') : [];
+            $ctrl.listOrders = localStorageService.get('Orders') ? localStorageService.get('Orders') : [];
+            console.log('opa')
         };
     };
 

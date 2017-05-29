@@ -17,36 +17,25 @@
                         }
                     }
                 })
-                .state('friends', {
-                    url: '/friends',
+                .state('friend_detail', {
+                    url: '/friend/detail',
                     views: {
+                        navigation: {
+                            controller: 'NavController as $ctrl',
+                            templateUrl: 'app/src/nav/nav.template.html'
+                        },
                         content: {
                             controller: 'FriendsController as $ctrl',
                             templateUrl: '/app/src/friends/friends.template.html'
-                        },
-                        footer: {
-                            templateUrl: 'app/src/nav/nav.template.html'
                         }
                     }
                 })
-                .state('orders', {
-                    url: '/orders',
+                .state('order_detail', {
+                    url: '/order/detail',
                     views: {
                         content: {
                             controller: 'OrdersController as $ctrl',
                             templateUrl: '/app/src/orders/orders.template.html'
-                        },
-                        footer: {
-                            templateUrl: 'app/src/nav/nav.template.html'
-                        }
-                    }
-                })
-                .state('ordersDetails', {
-                    url: '/orders-details',
-                    views: {
-                        content: {
-                            controller: 'OrdersDetailsController as $ctrl',
-                            templateUrl: '/app/src/orders_details/orders_details.template.html'
                         },
                         footer: {
                             templateUrl: 'app/src/nav/nav.template.html'
