@@ -9,26 +9,68 @@
     </div>
 </nav>
 
-<aside id="aside-friends" class="aside-friends open" ng-class="isAsideFriendsOpen ? 'open' : ''">
+<!-- FRIENDS'ASIDE -->
+<aside id="aside-friends" class="aside-friends" ng-class="isAsideFriendsOpen ? 'open' : ''">
     <form id="form-friends" class="form-friends" name="formFriends" novalidate>
         <div class="form-group">
             <label class="sr-only" for="name">name</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="friend name" ng-model="$ctrl.name">
+            <input type="text" id="name" name="name" class="form-control" placeholder="friend name" ng-model="$ctrl.friend.name">
         </div>
-        <button class="btn btn-default btn-add" ng-click="$ctrl.addFriend($ctrl.name)">add</button>
+        <button class="btn btn-default btn-add" ng-click="$ctrl.addFriend($ctrl.friend.name)">add</button>
     </form>
 
     <ul class="list-group list-friends">
-        <li class="list-group-item" ng-class="{ 'checked': $ctrl.markedFriends[friend.name], 'unchecked': !$ctrl.markedFriends[friend.name] }" ng-repeat="friend in $ctrl.list_friends">
+        <li class="list-group-item" ng-class="{ 'checked': $ctrl.markedFriends[friend.name], 'unchecked': !$ctrl.markedFriends[friend.name] }" ng-if="($ctrl.listFriends.length != 0)" ng-repeat="friend in $ctrl.listFriends">
             <div>
                 <p>{{ friend.name }}</p>
                 <p>R$ {{ friend.bill }}</p>
             </div>
             <input type="checkbox" ng-model="$ctrl.markedFriends[friend.name]">
         </li>
+        <li class="list-group-item text-center" ng-if="($ctrl.listFriends.length == 0)">list is empty.</li>
     </ul>
 </aside>
 
-<aside id="aside-orders" class="container-fluid aside-orders open" ng-class="isAsideOrdesOpen ? 'open' : ''">
-    <h5>aside orders</h5>
+<!-- ORDERS'ASIDE -->
+<aside id="aside-orders" class="aside-orders" ng-class="isAsideOrdesOpen ? 'open' : ''">
+    <form id="form-orders" class="form-orders" name="formOrders" novalidate>
+        <div class="form-group">
+            <label class="sr-only" for="order">order</label>
+            <input type="text" id="order" name="order" class="form-control" placeholder="order name" ng-model="$ctrl.order.name">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="price">price</label>
+            <input type="number" id="price" name="price" class="form-control" placeholder="price" ng-model="$ctrl.order.price">
+        </div>
+        <button class="btn btn-default btn-add" ng-click="$ctrl.addOrder($ctrl.order, $ctrl.markedFriends)">add</button>
+    </form>
+
+    <ul class="list-group list-orders">
+        <li class="list-group-item" ng-if="($ctrl.listOrders.length != 0)" ng-repeat="order in $ctrl.listOrders">
+            <div class="group-item-info">
+                <p>{{ order.name }}</p>
+                <p>{{ order.price }}</p>
+                <span class="badge">{{ order.qty }}</span>
+            </div>
+            <div class="group-item-commands">
+                <button class="btn btn-default">
+                    <i class="fa fa-plus"></i>
+                </button>
+                <button class="btn btn-default">
+                    <i class="fa fa-minus"></i>
+                </button>
+                <button class="btn btn-danger" ng-click="toBeDeleted = true">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+            <div class="remove-item-alert" ng-show="toBeDeleted">
+                <div>
+                    <p>are you sure?</p>
+                    <button class="btn btn-default" ng-click="$ctrl.delOrder($index)">yes</button>
+                    <button class="btn btn-danger" ng-click="toBeDeleted = false">no</button>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item text-center" ng-if="($ctrl.listOrders.length == 0)">list is empty.</li>
+    </ul>
 </aside>
