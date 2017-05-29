@@ -1,0 +1,56 @@
+.navigation
+    .aside-friends
+        background-color: lightblue
+        left: -50%
+        transition: left 0.5s
+        -webkit-transition: left 0.5s
+        &.open
+            left: 0
+            transition: left 0.5s
+            -webkit-transition: left 0.5s
+
+    .aside-orders
+        background-color: pink
+        right: -50%
+        transition: right 0.5s
+        -webkit-transition: right 0.5s
+        &.open
+            right: 0
+            transition: right 0.5s
+            -webkit-transition: right 0.5s
+
+    aside
+        box-sizing: border-box
+        height: 100vh
+        position: absolute
+        top: 0
+        width: 49%
+
+        .form-friends
+            color: black
+            font-size: 14px
+            font-weight: 400
+            margin: 15px auto
+            padding-left: 15px
+            padding-right: 15px
+
+            .form-group
+                margin-bottom: 5px
+
+        .btn-default
+            width: 100%
+
+    .list-friends
+        height: 400px
+        overflow-y: scroll
+        padding: 0 5px
+
+        .list-group-item
+            margin-bottom: 2.5px
+            padding: 6px 10px
+
+            &.checked
+                background-color: purple
+
+        p
+            margin: 0

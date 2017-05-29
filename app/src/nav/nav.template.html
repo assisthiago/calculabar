@@ -1,10 +1,34 @@
-<div id="nav" class="nav">
-    <div class="row">
-        <button class="btn btn-default col-xs-6" ui-sref="friends">
-            <i class="fa fa-users" aria-hidden="true"></i> lista de amigos
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <button type="button" class="btn btn-default navbar-btn" ng-click="isAsideFriendsOpen = !isAsideFriendsOpen">
+            <i class="fa fa-users" aria-hidden="true"></i>
         </button>
-        <button class="btn btn-default col-xs-6" ui-sref="orders">
-            <i class="fa fa-book" aria-hidden="true"></i> lista de pedidos
+        <button type="button" class="btn btn-default navbar-btn pull-right" ng-click="isAsideOrdesOpen = !isAsideOrdesOpen">
+            <i class="fa fa-cutlery" aria-hidden="true"></i>
         </button>
     </div>
-</div>
+</nav>
+
+<aside id="aside-friends" class="aside-friends open" ng-class="isAsideFriendsOpen ? 'open' : ''">
+    <form id="form-friends" class="form-friends" name="formFriends" novalidate>
+        <div class="form-group">
+            <label class="sr-only" for="name">name</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="friend name" ng-model="$ctrl.name">
+        </div>
+        <button class="btn btn-default btn-add" ng-click="$ctrl.addFriend($ctrl.name)">add</button>
+    </form>
+
+    <ul class="list-group list-friends">
+        <li class="list-group-item" ng-class="{ 'checked': $ctrl.markedFriends[friend.name], 'unchecked': !$ctrl.markedFriends[friend.name] }" ng-repeat="friend in $ctrl.list_friends">
+            <div>
+                <p>{{ friend.name }}</p>
+                <p>R$ {{ friend.bill }}</p>
+            </div>
+            <input type="checkbox" ng-model="$ctrl.markedFriends[friend.name]">
+        </li>
+    </ul>
+</aside>
+
+<aside id="aside-orders" class="container-fluid aside-orders open" ng-class="isAsideOrdesOpen ? 'open' : ''">
+    <h5>aside orders</h5>
+</aside>

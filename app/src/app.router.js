@@ -6,8 +6,12 @@
         .config(($stateProvider, $locationProvider, $urlRouterProvider) => {
             $stateProvider
                 .state('home', {
-                    url: '/home',
+                    url: '/',
                     views: {
+                        navigation: {
+                            controller: 'NavController as $ctrl',
+                            templateUrl: 'app/src/nav/nav.template.html'
+                        },
                         content: {
                             templateUrl: '/app/src/home/home.template.html'
                         }
@@ -26,7 +30,7 @@
                     }
                 })
                 .state('orders', {
-                    url: '/',
+                    url: '/orders',
                     views: {
                         content: {
                             controller: 'OrdersController as $ctrl',
@@ -38,7 +42,7 @@
                     }
                 })
                 .state('ordersDetails', {
-                    url: '/a',
+                    url: '/orders-details',
                     views: {
                         content: {
                             controller: 'OrdersDetailsController as $ctrl',
